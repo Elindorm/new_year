@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Масштабирование для мобильных устройств -->
+    <title>Ваш сертификат</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        body {
+            background-image: url('1677050000_havio-club-p-otkritka-skretch-novogodnyaya-oboi-63.jpg'); /* Путь к новогоднему фону */
+            background-size: cover;
+            background-position: center;
+            color: rgb(175, 39, 39);
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Убираем горизонтальную прокрутку */
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+
+        .certificate-container {
+            margin: 10px auto;
+            width: 90%;
+            max-width: 700px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .certificate {
+            width: 100%;
+            height: auto; /* Автоматический масштаб */
+            aspect-ratio: 4/3; /* Сохранение пропорций PDF */
+        }
+
+        .button-container {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap; /* Перенос кнопок на новую строку при узком экране */
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Снежинки */
+        .snowflake {
+            position: absolute;
+            top: -10%;
+            color: white;
+            font-size: 1em;
+            text-shadow: 0 0 5px #fff, 0 0 10px #aaa;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+            100% {
+                transform: translateX(100px) rotate(360deg); /* Падение с вращением */
+                top: 110%;
+            }
+        }
+
+        /* --- Адаптивность для мобильных устройств --- */
+
+        /* Для телефонов */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .certificate-container {
+                width: 100%;
+                padding: 0 5px;
+            }
+
+            .button {
+                font-size: 0.9em;
+                padding: 8px 10px;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Заголовок -->
+    <h1>Ваш новогодний сертификат</h1>
+
+    <!-- Контейнер для PDF -->
+    <div class="certificate-container">
+        <embed src="Подарочный сертификат.pdf" type="application/pdf" class="certificate">
+    </div>
+
+    <!-- Контейнер для кнопок -->
+    <div class="button-container">
+        <a href="Подарочный сертификат.pdf" download="Сертификат_подарка.pdf" class="button">Скачать</a>
+        <a href="index.html" class="button">Назад</a>
+    </div>
+
+    <!-- Снежинки -->
+    <div id="snowflakes"></div>
+
+    <script>
+        // Функция для генерации снежинок
+        const snowflakesContainer = document.getElementById('snowflakes');
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+
+            // Случайные размеры
+            const size = Math.random() * 15 + 5; // Размер от 5px до 20px
+            snowflake.style.fontSize = `${size}px`;
+
+            // Случайное начальное положение
+            snowflake.style.left = `${Math.random() * 100}vw`;
+
+            // Случайная длительность анимации (4-8 секунд)
+            const duration = Math.random() * 4 + 4;
+            snowflake.style.animationDuration = `${duration}s`;
+
+            // Случайная задержка анимации
+            const delay = Math.random() * 2;
+            snowflake.style.animationDelay = `${delay}s`;
+
+            snowflakesContainer.appendChild(snowflake);
+
+            // Удаление снежинки после завершения анимации
+            setTimeout(() => {
+                snowflake.remove();
+            }, duration * 1000);
+        }
+
+        // Создаем снежинки сразу при загрузке страницы
+        for (let i = 0; i < 10; i++) {
+            createSnowflake();
+        }
+
+        // Продолжаем генерировать снежинки каждые 500 мс
+        setInterval(createSnowflake, 500);
+    </script>
+</body>
+</html>

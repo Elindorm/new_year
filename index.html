@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Масштабирование для мобильных устройств -->
+    <title>С Новым Годом!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        body {
+            background-image: url('08fb5e3d2374934e9296985d67bc8539.png'); /* Фон */
+            background-size: cover;
+            background-position: center;
+            color: rgb(175, 39, 39);
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Убираем прокрутку */
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive; /* Праздничный шрифт для заголовка */
+            font-size: 3em;
+            margin-top: 20px;
+            color: rgb(175, 39, 39);
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            color: rgb(175, 39, 39);
+            padding: 0 15px; /* Отступы для текстов на мобильных устройствах */
+        }
+
+        /* Контейнер кнопок */
+        .button-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Перенос кнопок на новую строку при узком экране */
+        }
+
+        /* Кнопки */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            min-width: 150px; /* Минимальная ширина кнопки */
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Снежинки */
+        .snowflake {
+            position: absolute;
+            top: -10%; /* Начинаем за пределами экрана */
+            color: white;
+            font-size: 1.5em;
+            text-shadow: 0 0 5px #fff, 0 0 10px #aaa; /* Эффект свечения */
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+            100% {
+                transform: translateX(100px) rotate(360deg); /* Падение с вращением */
+                top: 110%;
+            }
+        }
+
+        /* --- Адаптивность для мобильных устройств --- */
+
+        /* Для планшетов */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .message {
+                font-size: 1.2em;
+            }
+            .button {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+        }
+
+        /* Для телефонов */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            .message {
+                font-size: 1em;
+            }
+            .button {
+                font-size: 0.9em;
+                padding: 10px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Текст с поздравлением -->
+    <h1>С Новым Годом!</h1>
+    <p class="message">Дорогой Дима!
+
+        С наступающим Новым годом! Пусть этот год принесет тебе много радости, счастья и удачи. 
+        Желаю, чтобы в жизни было больше ярких моментов, свершений и незабываемых впечатлений. 
+        Пусть сбудутся все мечты, а впереди будет только светлая дорога! Спасибо, что всегда рядом, ты — лучший.
+    </p>
+
+    <!-- Кнопки -->
+    <div class="button-container">
+        <a href="certificate.html" class="button">Получить подарок</a>
+    </div>
+
+    <!-- Снежинки -->
+    <div id="snowflakes"></div>
+
+    <script>
+        // Функция для генерации снежинок
+        const snowflakesContainer = document.getElementById('snowflakes');
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+
+            // Случайные размеры
+            const size = Math.random() * 20 + 10; // Размер от 10px до 30px
+            snowflake.style.fontSize = `${size}px`;
+
+            // Случайное начальное положение
+            snowflake.style.left = `${Math.random() * 100}vw`; // Положение по ширине экрана
+
+            // Случайная длительность анимации (5-10 секунд)
+            const duration = Math.random() * 5 + 5;
+            snowflake.style.animationDuration = `${duration}s`;
+
+            // Случайная задержка анимации
+            const delay = Math.random() * 5;
+            snowflake.style.animationDelay = `${delay}s`;
+
+            snowflakesContainer.appendChild(snowflake);
+
+            // Удаление снежинки после завершения анимации
+            setTimeout(() => {
+                snowflake.remove();
+            }, duration * 1000);
+        }
+
+        // Создаем снежинки сразу при загрузке страницы
+        for (let i = 0; i < 20; i++) {
+            createSnowflake();
+        }
+
+        // Продолжаем генерировать снежинки каждые 300 мс
+        setInterval(createSnowflake, 300);
+    </script>
+</body>
+</html>
